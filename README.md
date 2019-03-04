@@ -1,1 +1,1 @@
-# Modules with java
+# dojo_modules_with_java
