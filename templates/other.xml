@@ -7,4 +7,10 @@
       <option name="JSON" value="true" />
     </context>
   </template>
+  <template name="invalfor" value="{&#10;  &quot;errors&quot;: [&#10;    {&#10;      &quot;status&quot;: 400,&#10;      &quot;code&quot;: 477,&#10;      &quot;title&quot;: &quot;INVALID FORMAT&quot;,&#10;      &quot;detail&quot;: &quot;$field$ format is YYYY-MM-DD&quot;,&#10;      &quot;source&quot;: {&#10;        &quot;example&quot;: &quot;1980-02-15&quot;&#10;      }&#10;    }&#10;  ]&#10;}" toReformat="false" toShortenFQNames="true">
+    <variable name="field" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JSON" value="true" />
+    </context>
+  </template>
 </templateSet>
