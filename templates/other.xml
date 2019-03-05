@@ -13,4 +13,9 @@
       <option name="JSON" value="true" />
     </context>
   </template>
+  <template name="invaldatr" value="{&#10;  &quot;errors&quot;: [&#10;    {&#10;      &quot;status&quot;: 400,&#10;      &quot;code&quot;: 4926,&#10;      &quot;title&quot;: &quot;INVALID DATA RECEIVED&quot;,&#10;      &quot;detail&quot;: &quot;gendervalue is not in the allowed enumeration&quot;,&#10;      &quot;source&quot;: {&#10;        &quot;example&quot;: &quot;MALE&quot;&#10;      }&#10;    }&#10;  ]&#10;}" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JSON" value="true" />
+    </context>
+  </template>
 </templateSet>
