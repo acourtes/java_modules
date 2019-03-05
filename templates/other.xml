@@ -1,0 +1,10 @@
+<templateSet group="other">
+  <template name="mandata" value="{&#10;  &quot;errors&quot;: [&#10;    {&#10;      &quot;status&quot;: 400,&#10;      &quot;code&quot;: $code$,&#10;      &quot;title&quot;: &quot;MANDATORY DATA MISSING&quot;,&#10;      &quot;detail&quot;: &quot;$var$ needed&quot;,&#10;      &quot;source&quot;: {&#10;        &quot;example&quot;: $example$&#10;      }&#10;    }&#10;  ]&#10;}" toReformat="false" toShortenFQNames="true">
+    <variable name="code" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="var" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="example" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JSON" value="true" />
+    </context>
+  </template>
+</templateSet>
