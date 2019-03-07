@@ -10,5 +10,8 @@ The code has been left commented in the different classes of the client.
 Nothing special because this branch is a correction proposal to our problem of
 strong encapsulation which was hard to achieve before Java 9 modules.
 
-With a little bit some effort, you can make Lombok still work with modules by using
-the edge version :) Look at the parent POM for more information !
+As you have certainly seen, Lombok dependency is not yet ready for being used with
+java module. We can make it almost work with the edge version but after during execution,
+it finally doesn't work...
+
+For the reflection part, you will discover the *opens* instruction.
