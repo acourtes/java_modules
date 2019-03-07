@@ -2,7 +2,6 @@ package org.arolla.internal;
 
 import fr.arolla.scooterprovider.scooter.Scooter;
 import io.github.benas.randombeans.randomizers.number.IntegerRandomizer;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

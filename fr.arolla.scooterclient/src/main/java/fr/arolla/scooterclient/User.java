@@ -2,6 +2,8 @@ package fr.arolla.scooterclient;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 class User {
 
@@ -10,4 +12,5 @@ class User {
     private boolean isUsingALocomotion;
     private boolean isJuicingALocomotion;
     private boolean isHappy;
+    private BigDecimal creditAmount;
 }
