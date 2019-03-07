@@ -2,11 +2,7 @@ package org.arolla.internal;
 
 import fr.arolla.scooterprovider.scooter.Scooter;
 import io.github.benas.randombeans.randomizers.number.IntegerRandomizer;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 public class DetailedScooter extends Scooter {
 
     private Integer mileage;
@@ -20,5 +16,21 @@ public class DetailedScooter extends Scooter {
         this.setBatteryPercentage(scooter.getBatteryPercentage());
         this.setMileage(IntegerRandomizer.aNewIntegerRandomizer().getRandomValue());
         this.setPower(Power.STANDARD);
+    }
+
+    public Integer getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(Integer mileage) {
+        this.mileage = mileage;
+    }
+
+    public Power getPower() {
+        return power;
+    }
+
+    public void setPower(Power power) {
+        this.power = power;
     }
 }

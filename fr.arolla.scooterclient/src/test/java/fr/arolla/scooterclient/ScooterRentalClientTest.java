@@ -7,6 +7,8 @@ import fr.arolla.scooterprovider.scooter.State;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ScooterRentalClientTest {
@@ -48,6 +50,8 @@ public class ScooterRentalClientTest {
     @Test
     public void test_to_give_back_successfully_a_scooter() {
         final User user = new User();
+        final BigDecimal initialCredit = BigDecimal.TEN;
+        user.setCreditAmount(initialCredit);
         final Scooter scooter = createScooterWithGivenState(State.GOOD);
 
         final boolean successGiveBack = scooterRentalClient.giveBackAScooter(user, scooter);
@@ -55,6 +59,24 @@ public class ScooterRentalClientTest {
         assertThat(successGiveBack).isTrue();
         assertThat(user.isHappy()).isTrue();
         assertThat(user.getRentedLocomotionId()).isNull();
+
+        boolean userWalletClassExists = false;
+
+        // As you can try, the reflection access works here without any particular
+        // directive in the module-info.java
+        // But try to run the ScooterMain class without the opens directive :)
+        try {
+            Class.forName("fr.arolla.scooterprovider.userwallet.Wallet");
+            userWalletClassExists = true;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        if (userWalletClassExists) {
+            assertThat(user.getCreditAmount()).isNotEqualTo(initialCredit);
+        } else {
+            assertThat(user.getCreditAmount()).isEqualTo(initialCredit);
+        }
     }
 
     @Test

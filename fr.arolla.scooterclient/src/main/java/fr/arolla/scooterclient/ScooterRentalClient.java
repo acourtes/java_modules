@@ -5,8 +5,15 @@ package fr.arolla.scooterclient;
 import fr.arolla.scooterprovider.ScooterProvider;
 import fr.arolla.scooterprovider.scooter.Scooter;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 class ScooterRentalClient {
 
+    private static final BigDecimal RENTAL_PRICE = BigDecimal.ONE;
     private ScooterProvider scooterProvider;
 
     ScooterRentalClient(ScooterProvider scooterProvider) {
@@ -38,6 +45,7 @@ class ScooterRentalClient {
         user.setUsingALocomotion(false);
         user.setRentedLocomotionId(null);
         user.setHappy(true);
+        updateUserWallet(user);
 
         return true;
     }
@@ -55,6 +63,40 @@ class ScooterRentalClient {
         user.setHappy(true);
 
         return true;
+    }
+
+    private static void updateUserWallet(User user) {
+        Class wallet = null;
+        try {
+            wallet = Class.forName("fr.arolla.scooterprovider.userwallet.Wallet");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        if (wallet != null) {
+
+            final Method[] declaredMethods = wallet.getDeclaredMethods();
+
+            try {
+                final Method getUserCreditAmountById = Arrays.stream(declaredMethods)
+                        .filter(m -> m.getName().contains("getUserCreditAmountById"))
+                        .collect(Collectors.toList())
+                        .get(0);
+
+                final BigDecimal currentUserCredit = (BigDecimal) getUserCreditAmountById.invoke(wallet, user.getId());
+
+                final BigDecimal finalUserCredit = currentUserCredit.subtract(RENTAL_PRICE);
+                user.setCreditAmount(finalUserCredit);
+
+                final Method updateUserCreditAmount = Arrays.stream(declaredMethods)
+                        .filter(m -> m.getName().contains("updateUserCreditAmount"))
+                        .collect(Collectors.toList())
+                        .get(0);
+                updateUserCreditAmount.invoke(wallet, user.getId(), finalUserCredit);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     // This method is no more possible as we have restrict the internal package access from provider
